@@ -21,7 +21,7 @@ ROOT = ROOT.relative_to(Path.cwd())
 
 #Image Config
 IMAGES_DIR = ROOT/'images'
-DEFAULT_IMAGE = IMAGES_DIR/'UserImage.jpg'
+DEFAULT_IMAGE = IMAGES_DIR/'DefaultImage.jpg'
 DEFAULT_DETECT_IMAGE = IMAGES_DIR/'DetectedImage.jpg'
 
 #Model Configurations
