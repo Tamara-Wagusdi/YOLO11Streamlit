@@ -43,7 +43,7 @@ st.sidebar.header("Model Configurations")
 model_type = "Detection"
 
 #Select Confidence Value
-confidence_value = float(st.sidebar.slider("Select Model Confidence Value", 50, 100, 80))/100
+confidence_value = float(st.sidebar.slider("Select model confidence value", 50, 100, 80))/100
 
 model_path = Path(DETECTION_MODEL)
 
