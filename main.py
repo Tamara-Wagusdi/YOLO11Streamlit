@@ -38,7 +38,7 @@ st.set_page_config(
 st.header("NT and NB Detection using YOLO11")
 
 #SideBar
-st.sidebar.header("Model Configurations")
+st.sidebar.header("Model Configuration")
 
 model_type = "Detection"
 
