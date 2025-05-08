@@ -40,8 +40,6 @@ st.header("NT and NB Detection using YOLO11")
 #SideBar
 st.sidebar.header("Model Configuration")
 
-model_type = "Detection"
-
 #Select Confidence Value
 confidence_value = float(st.sidebar.slider("Select model confidence value", 50, 100, 80))/100
 
