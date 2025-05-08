@@ -43,9 +43,9 @@ st.sidebar.header("Model Configuration")
 #Select Confidence Value
 confidence_value = float(st.sidebar.slider("Select model confidence value", 50, 100, 80))/100
 
+#Load the YOLO Model
 model_path = Path(DETECTION_MODEL)
 
-#Load the YOLO Model
 try:
     model = YOLO(model_path)
     class_names = model.names
