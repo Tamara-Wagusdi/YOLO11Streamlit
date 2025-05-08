@@ -21,21 +21,29 @@ ROOT = ROOT.relative_to(Path.cwd())
 
 #Image Config
 IMAGES_DIR = ROOT/'images'
-DEFAULT_IMAGE = IMAGES_DIR/'DefaultImage.jpg'
+DEFAULT_IMAGE = IMAGES_DIR/'UserImage.jpg'
 DEFAULT_DETECT_IMAGE = IMAGES_DIR/'DetectedImage.jpg'
 
 #Model Configurations
 MODEL_DIR = ROOT/'weights'
 DETECTION_MODEL = MODEL_DIR/'my_model.pt'
 
+#Page Layout
 st.set_page_config(
     page_title = "Ultra Detect",
     page_icon = "🏥"
 )
 
+#Header
 st.header("NT and NB Detection using YOLO11")
 
+#SideBar
+st.sidebar.header("Model Configurations")
+
 model_type = "Detection"
+
+#Select Confidence Value
+confidence_value = float(st.sidebar.slider("Select Model Confidence Value", 25, 100, 40))/100
 
 model_path = Path(DETECTION_MODEL)
 
@@ -75,7 +83,7 @@ with col2:
             st.image(default_detected_image_path, caption = "Detected Image", use_container_width = True)
         else:
             if st.sidebar.button("Detect Objects"):
-                result = model.predict(uploaded_image)
+                result = model.predict(uploaded_image, conf = confidence_value)
                 boxes = result[0].boxes
                 result_plotted = result[0].plot()[:,:,::-1]
                 st.image(result_plotted, caption = "Detected Image", use_container_width = True)
@@ -94,7 +102,8 @@ with col2:
                             w_fix = w / image_width
                             h_fix = h / image_height
 
-                            relative_box = torch.tensor([x_fix, y_fix, w_fix, h_fix, box.conf.item(), box.cls.item()],
+                            relative_box = torch.tensor([x_fix, y_fix, w_fix, h_fix,
+                                                         box.conf.item(), box.cls.item()],
                                                         dtype=torch.float32)
 
                             st.markdown(f"**Class:** {class_name} <br>{relative_box}", unsafe_allow_html=True)
